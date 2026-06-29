@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UserGhost Arena</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">UserGhost</p>
+          <h1>AI User Arena</h1>
+          <p class="tagline">Compare observed browser journeys before launch.</p>
+        </div>
+        <div class="status-pill" id="openai-status">Playwright + OpenAI required</div>
+      </header>
+
+      <section class="arena-grid">
+        <aside class="control-panel" aria-label="Arena controls">
+          <form id="arena-form" class="stack">
+            <div class="field">
+              <label for="variant-a">Variant A URL</label>
+              <input id="variant-a" name="variantAUrl" value="https://openai.com" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="variant-b">Variant B URL</label>
+              <input id="variant-b" name="variantBUrl" value="https://claude.ai/new" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="task">Task</label>
+              <select id="task" name="taskId"></select>
+            </div>
+            <div class="field">
+              <label for="custom-context">Custom context</label>
+              <textarea
+                id="custom-context"
+                name="customContext"
+                rows="4"
+                placeholder="Example: Can a procurement lead find SOC 2 details, contract terms, and a way to book a security review?"
+              ></textarea>
+            </div>
+            <div class="field">
+              <label for="profile-search">Persona search</label>
+              <input id="profile-search" placeholder="Founder, skeptic, mobile..." autocomplete="off">
+            </div>
+            <div class="profile-count" id="profile-count">Loading profiles...</div>
+            <div class="profile-list" id="profile-list" aria-label="Persona list"></div>
+            <input type="hidden" id="profile-id" name="profileId">
+            <button class="run-button" type="submit">Run Trace</button>
+          </form>
+        </aside>
+
+        <section class="stage-panel">
+          <div class="stage-header">
+            <div>
+              <p class="eyebrow">Arena trace</p>
+              <h2 id="run-title">Variant A vs Variant B</h2>
+            </div>
+            <div class="run-meta" id="run-meta">Pick a persona and run the arena.</div>
+          </div>
+
+          <div class="browser-grid">
+            <article class="browser-pane" data-variant="A">
+              <div class="browser-toolbar">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="browser-title">Variant A</span>
+              </div>
+              <div class="browser-frame-wrap">
+                <img id="screenshot-a" class="trace-screenshot" alt="Variant A observed browser state">
+                <div class="screenshot-placeholder" id="placeholder-a"><span>Standby</span></div>
+                <div class="cursor" id="cursor-a"></div>
+              </div>
+              <div class="meter-row">
+                <span>Confusion</span>
+                <div class="meter"><div id="confusion-a"></div></div>
+                <strong id="confusion-a-value">0</strong>
+              </div>
+            </article>
+
+            <article class="browser-pane" data-variant="B">
+              <div class="browser-toolbar">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="browser-title">Variant B</span>
+              </div>
+              <div class="browser-frame-wrap">
+                <img id="screenshot-b" class="trace-screenshot" alt="Variant B observed browser state">
+                <div class="screenshot-placeholder" id="placeholder-b"><span>Standby</span></div>
+                <div class="cursor" id="cursor-b"></div>
+              </div>
+              <div class="meter-row">
+                <span>Confusion</span>
+                <div class="meter"><div id="confusion-b"></div></div>
+                <strong id="confusion-b-value">0</strong>
+              </div>
+            </article>
+          </div>
+
+          <section class="log-panel" aria-label="Live step log">
+            <div class="section-head">
+              <h2>Step log</h2>
+              <div class="log-actions">
+                <button id="replay-button" class="secondary-button" type="button" disabled>Replay Trace</button>
+                <span id="log-status">Idle</span>
+              </div>
+            </div>
+            <ol id="step-log" class="step-log"></ol>
+          </section>
+        </section>
+
+        <aside class="report-panel" aria-label="Winner report">
+          <section class="persona-card" id="persona-card"></section>
+          <section class="scorecard" id="scorecard">
+            <p class="empty-state">The decision report will appear here after the observed trace.</p>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

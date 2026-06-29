@@ -2,28 +2,28 @@
 
 help:
 	@echo "Common commands:"
-	@echo "  make install  Sync the UV environment"
-	@echo "  make dev      Run the Flask development server"
-	@echo "  make format   Format Python files with Ruff"
-	@echo "  make lint     Lint Python files with Ruff"
-	@echo "  make check    Run formatting check and lint"
-	@echo "  make clean    Remove local Python caches"
+	@echo "  make install  Install Node dependencies"
+	@echo "  make dev      Run the UserGhost Arena server"
+	@echo "  make format   No formatter configured"
+	@echo "  make lint     Run JavaScript syntax checks"
+	@echo "  make check    Run JavaScript syntax checks"
+	@echo "  make clean    Remove local caches and logs"
 
 install:
-	uv sync
+	npm install
+	npx playwright install chromium
 
 dev:
-	uv run flask --app app run --host 127.0.0.1 --port 5000 --debug
+	npm run dev
 
 format:
-	uv run ruff format .
+	@echo "No formatter configured for this no-build Node demo."
 
 lint:
-	uv run ruff check .
+	npm run check
 
 check:
-	uv run ruff format --check .
-	uv run ruff check .
+	npm run check
 
 clean:
-	rm -rf __pycache__ .ruff_cache
+	rm -rf __pycache__ .ruff_cache node_modules *.log
