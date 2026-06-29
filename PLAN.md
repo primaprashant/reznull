@@ -15,23 +15,25 @@ One-hour build of a hardcoded demo: Flask single page, scenario selector, Run si
 ### Phase 1: Walking skeleton (demo runs end to end)
 
 #### Task 1: End-to-end path for the onboarding scenario
+**Status:** Complete.
+
 **Description:** Stand up the Flask app and deliver the full click-to-result path for one scenario. Page renders the onboarding control and variants from `scenarios.py`, a Run button posts to `/simulate`, and the response renders as a ranked list of variants with predicted metric. Rough styling with Tailwind CDN so it is presentable, not polished.
 
 **Acceptance criteria:**
-- [ ] `python app.py` serves the page at localhost with the onboarding variant cards visible.
-- [ ] Clicking Run calls `/simulate?scenario=onboarding` and renders variants ranked by predicted metric.
-- [ ] Data comes from `scenarios.py`, not hardcoded in the template or JS.
+- [x] `uv run python app.py` serves the page at localhost with the onboarding variant cards visible.
+- [x] Clicking Run calls `/simulate?scenario=onboarding` and renders variants ranked by predicted metric.
+- [x] Data comes from `scenarios.py`, not hardcoded in the template or JS.
 
 **Verification:**
-- [ ] App runs without errors.
-- [ ] Manual check: load page, click Run, a ranked leaderboard appears.
+- [x] App runs without errors.
+- [x] Manual check: load page, click Run, a ranked leaderboard appears.
 
 **Dependencies:** None
-**Files:** `app.py`, `scenarios.py`, `templates/index.html`, `static/app.js`
+**Files:** `app.py`, `scenarios.py`, `templates/index.html`, `static/app.js`, `Makefile`
 **Scope:** M
 
 ### Checkpoint: Skeleton
-- [ ] Demo is presentable end to end with one scenario. If the clock died here, you could still show it.
+- [x] Demo is presentable end to end with one scenario. If the clock died here, you could still show it.
 
 ### Phase 2: Make it convincing (full canned experience)
 
